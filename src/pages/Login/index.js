@@ -8,8 +8,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector((state) => state.auth.login.errors);
-  const isLoading = useSelector((state) => state.auth.login.isLoading);
-
+  // const isLoading = useSelector((state) => state.auth.login.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
   const user = useSelector((state) => state.auth.login.currentUser);
   useEffect(() => {
     if (user) {
@@ -30,7 +30,9 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    loginUser(loginForm, dispatch, navigate);
+    setIsLoading(true);
+    await loginUser(loginForm, dispatch, navigate);
+    setIsLoading(false);
   };
 
   return (
