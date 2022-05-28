@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+td,
+th {
+  text-align: center !important;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0 !important;
+}
+.row {
+  --bs-gutter-x: 0.75rem !important;
+}
+.cart-shadow:hover {
+  box-shadow: 0.25rem 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
