@@ -30,14 +30,15 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => $validator->errors()->toJson()
-            ], 422);
+            ], 400);
         }
         $user = User::create(array_merge($validator->validate(), ['password' => Hash::make($request->password), 'role' => 'user']));
         return response()->json(['message' => 'Tạo tài khoản thành công.']);
     }
     public function login(Request $request)
     {
-        $this->validate($request, [
+
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
         ], [
@@ -45,6 +46,12 @@ class UserController extends Controller
             'password.required' => "Vui lòng nhập mật khẩu",
             'email.email' => "Vui lòng nhập đúng định dạng",
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors()->toJson()
+            ], 400);
+        }
+
 
         $credentials = request(['email', 'password']);
         if (!$token = auth()->attempt($credentials)) {
